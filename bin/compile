@@ -41,7 +41,7 @@ else
     cd $CACHE_DIR
     GRADLE_URL="http://services.gradle.org/distributions/${GRADLE_DIST}-bin.zip"
     echo -n "-----> Installing $GRADLE_DIST....."
-    curl --location $GRADLE_URL > ${GRADLE_DIST}-all.zip
+    curl --location --silent $GRADLE_URL > ${GRADLE_DIST}-all.zip
     jar xf ${GRADLE_DIST}-all.zip
     chmod u+rx ${GRADLE_DIST}/bin/gradle
     echo " done"
@@ -57,7 +57,6 @@ export PATH=$CACHE_DIR/$GRADLE_DIST/bin:$PATH
  
 # build app
 echo "-----> Building Gradle app..."
-echo "       WARNING: The Gradle buildpack is currently in Beta."
 echo "-----> executing $BUILDCMD"
 
 $BUILDCMD 2>&1 | sed -u 's/^/       /'
